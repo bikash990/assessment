@@ -19,4 +19,7 @@ class ImageConstant {
   static const String irrigation = "$baseAssets/irrigation.png";
   static const String chart = "$baseAssets/chart.png";
   static const String weather = "$baseAssets/weather.png";
+  static const String paddy = "$baseAssets/paddy.png";
+  static const String tomato = "$baseAssets/tomato.png";
+  static const String potato = "$baseAssets/potato.png";
 }

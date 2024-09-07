@@ -1,4 +1,5 @@
 import 'package:agriculture_app/constant/image_constant.dart';
+import 'package:agriculture_app/feature/help_page/help_screen.dart';
 import 'package:agriculture_app/feature/home_page/view/home_screen.dart';
 import 'package:agriculture_app/feature/login/widget/text_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) => HomeScreen()));
+                                            builder: (_) => HelpScreen()));
                                   }
                                 },
                                 child: const Text(
