@@ -143,6 +143,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'Sign up with',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+                SizedBox(
                   height: 50,
                 ),
                 Row(
