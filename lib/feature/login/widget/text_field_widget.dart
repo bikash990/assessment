@@ -4,18 +4,15 @@ class TextFieldRow extends StatelessWidget {
   final String text;
   final bool isPassword;
   final TextEditingController? controller;
-  final FocusNode? focusNode;
   final String? Function(String?) validator;
-  final void Function()? onFocusChange;
 
-  const TextFieldRow(
-      {super.key,
-      required this.text,
-      required this.isPassword,
-      this.controller,
-      required this.validator,
-      this.focusNode,
-      this.onFocusChange});
+  const TextFieldRow({
+    super.key,
+    required this.text,
+    required this.isPassword,
+    this.controller,
+    required this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,7 @@ class TextFieldRow extends StatelessWidget {
           child: TextFormField(
             validator: validator,
             controller: controller,
-            focusNode: focusNode,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: isPassword,
             decoration: InputDecoration(
               contentPadding:
@@ -53,11 +50,6 @@ class TextFieldRow extends StatelessWidget {
                     width: 1.0),
               ),
             ),
-            onChanged: (value) {
-              if (focusNode?.hasFocus ?? false) {
-                Form.of(context).validate();
-              }
-            },
           ),
         ),
       ],

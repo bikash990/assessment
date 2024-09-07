@@ -1,3 +1,4 @@
+import 'package:agriculture_app/constant/image_constant.dart';
 import 'package:agriculture_app/feature/home_page/view/home_screen.dart';
 import 'package:agriculture_app/feature/login/widget/text_field_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.87),
+      backgroundColor: Colors.white.withOpacity(0.75),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 50),
@@ -29,6 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontSize: 24,
                       color: Colors.black,
                       fontWeight: FontWeight.w400),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Image.asset(
+                  ImageConstant.cropImage,
+                  height: 80,
                 ),
                 const SizedBox(
                   height: 40,
@@ -103,12 +112,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                           ),
                           const SizedBox(
-                            height: 50,
+                            height: 30,
                           ),
                           Align(
                             alignment: Alignment.center,
                             child: ElevatedButton(
-                                style: ButtonStyle(
+                                style: const ButtonStyle(
                                     padding: WidgetStatePropertyAll(
                                         EdgeInsets.symmetric(
                                             horizontal: 35, vertical: 14)),
@@ -123,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             builder: (_) => HomeScreen()));
                                   }
                                 },
-                                child: Text(
+                                child: const Text(
                                   'Create',
                                   style: TextStyle(color: Colors.black),
                                 )),
@@ -133,6 +142,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(ImageConstant.google),
+                    Image.asset(ImageConstant.faceBook),
+                    Container(
+                        height: 33,
+                        width: 33,
+                        decoration: BoxDecoration(color: Color(0xff0076B2)),
+                        child: Image.asset(ImageConstant.linkDin)),
+                  ],
+                )
               ],
             ),
           ),
