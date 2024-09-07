@@ -2,10 +2,12 @@ import 'package:agriculture_app/constant/image_constant.dart';
 import 'package:agriculture_app/feature/help_page/help_screen.dart';
 import 'package:agriculture_app/feature/home_page/view/home_screen.dart';
 import 'package:agriculture_app/feature/notification/notification_screen.dart';
+import 'package:agriculture_app/feature/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
-  const BottomNavigationScreen({super.key});
+  final String username;
+  const BottomNavigationScreen({super.key, required this.username});
 
   @override
   State<BottomNavigationScreen> createState() => _BottomNavigationScreenState();
@@ -15,7 +17,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomeScreen(),
-    HelpScreen(),
+    ProfileScreen(),
     NotificationScreen(),
     HelpScreen(),
   ];

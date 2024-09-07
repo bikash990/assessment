@@ -11,6 +11,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _usernameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: _usernameController,
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -106,8 +114,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) =>
-                                      const BottomNavigationScreen()));
+                                  builder: (_) => BottomNavigationScreen(
+                                        username: _usernameController.text,
+                                      )));
                         }
                       },
                       child: const Text(
@@ -151,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: Colors.black),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.pushReplacement(context,
+                        onTap: () => Navigator.push(context,
                             MaterialPageRoute(builder: (_) => SignUpScreen())),
                         child: Text(
                           'Create new',

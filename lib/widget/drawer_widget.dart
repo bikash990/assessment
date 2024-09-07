@@ -1,13 +1,26 @@
-import 'package:agriculture_app/constant/image_constant.dart';
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class DrawerWidget extends StatelessWidget {
+import 'package:agriculture_app/constant/image_constant.dart';
+import 'package:agriculture_app/feature/bottom_navigation/bottom_navigation_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class DrawerWidget extends StatefulWidget {
   const DrawerWidget({
     super.key,
   });
 
   @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  @override
   Widget build(BuildContext context) {
+    final String username =
+        (context.findAncestorWidgetOfExactType<BottomNavigationScreen>()
+                as BottomNavigationScreen)
+            .username;
     return SafeArea(
       child: Drawer(
         child: Padding(
@@ -29,11 +42,8 @@ class DrawerWidget extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const Row(
-                children: [
-                  Text('bikash@gmail.com'),
-                  Icon(Icons.arrow_drop_down)
-                ],
+              Row(
+                children: [Text(username), Icon(Icons.arrow_drop_down)],
               ),
               const SizedBox(
                 height: 30,
