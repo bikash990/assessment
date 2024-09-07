@@ -1,4 +1,5 @@
 import 'package:agriculture_app/feature/login/view/login_screen.dart';
+import 'package:agriculture_app/feature/register/register_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

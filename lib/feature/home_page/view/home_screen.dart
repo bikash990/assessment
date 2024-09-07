@@ -1,4 +1,6 @@
 import 'package:agriculture_app/constant/image_constant.dart';
+import 'package:agriculture_app/feature/help_page/help_screen.dart';
+import 'package:agriculture_app/feature/notification/notification_screen.dart';
 import 'package:agriculture_app/widget/drawer_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -38,26 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: DrawerWidget(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Image.asset(ImageConstant.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(ImageConstant.person),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(ImageConstant.notification),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(ImageConstant.help),
-            label: '',
-          ),
-        ],
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,

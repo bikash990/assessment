@@ -43,6 +43,7 @@ class TextFieldRow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25.0),
               ),
               fillColor: Color(0xffFFFFFF),
+              filled: true,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25.0),
                 borderSide: BorderSide(
