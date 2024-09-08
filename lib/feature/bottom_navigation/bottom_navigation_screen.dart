@@ -6,8 +6,9 @@ import 'package:agriculture_app/feature/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
-  final String username;
-  const BottomNavigationScreen({super.key, required this.username});
+  const BottomNavigationScreen({
+    super.key,
+  });
 
   @override
   State<BottomNavigationScreen> createState() => _BottomNavigationScreenState();

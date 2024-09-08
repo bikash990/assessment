@@ -15,12 +15,22 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
+  String? _email;
+  @override
+  void initState() {
+    super.initState();
+    _loadEmail();
+  }
+
+  Future<void> _loadEmail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _email = prefs.getString('email');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final String username =
-        (context.findAncestorWidgetOfExactType<BottomNavigationScreen>()
-                as BottomNavigationScreen)
-            .username;
     return SafeArea(
       child: Drawer(
         child: Padding(
@@ -43,7 +53,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 height: 10,
               ),
               Row(
-                children: [Text(username), Icon(Icons.arrow_drop_down)],
+                children: [
+                  Text(_email.toString()),
+                  Icon(Icons.arrow_drop_down)
+                ],
               ),
               const SizedBox(
                 height: 30,

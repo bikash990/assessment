@@ -5,14 +5,15 @@ class TextFieldRow extends StatelessWidget {
   final bool isPassword;
   final TextEditingController? controller;
   final String? Function(String?) validator;
+  final Function(String?) onSave;
 
-  const TextFieldRow({
-    super.key,
-    required this.text,
-    required this.isPassword,
-    this.controller,
-    required this.validator,
-  });
+  const TextFieldRow(
+      {super.key,
+      required this.text,
+      required this.isPassword,
+      this.controller,
+      required this.validator,
+      required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,7 @@ class TextFieldRow extends StatelessWidget {
             controller: controller,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: isPassword,
+            onSaved: onSave,
             decoration: InputDecoration(
               contentPadding:
                   EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),

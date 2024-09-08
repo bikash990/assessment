@@ -1,6 +1,7 @@
 import 'package:agriculture_app/feature/bottom_navigation/bottom_navigation_screen.dart';
 import 'package:agriculture_app/feature/register/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -12,10 +13,15 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
-
+  final TextEditingController _passswordController = TextEditingController();
+  String _email = '';
+  String _password = '';
+  String? _errorMessage;
   @override
   void dispose() {
     _usernameController.dispose();
+    _passswordController.dispose();
+
     super.dispose();
   }
 
@@ -43,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    controller: _usernameController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'please enter  your email';
@@ -73,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    controller: _usernameController,
+                    controller: _passswordController,
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -109,14 +116,31 @@ class _LoginScreenState extends State<LoginScreen> {
                               horizontal: 35, vertical: 14)),
                           backgroundColor:
                               WidgetStatePropertyAll(Color(0xff366842))),
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState?.validate() ?? false) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => BottomNavigationScreen(
-                                        username: _usernameController.text,
-                                      )));
+                          _formKey.currentState!.save();
+                          String email = _usernameController.text;
+                          SharedPreferences preferences =
+                              await SharedPreferences.getInstance();
+
+                          preferences.setString('email', email);
+                          String? registeredEmail =
+                              preferences.getString('registerEmail');
+                          String? registeredPassword =
+                              preferences.getString('registerPassword');
+                          if (_email == registeredEmail &&
+                              _password == registeredPassword) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Login successful!')));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => BottomNavigationScreen()));
+                          } else {
+                            setState(() {
+                              _errorMessage = 'Invalid email or password';
+                            });
+                          }
                         }
                       },
                       child: const Text(

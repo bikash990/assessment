@@ -5,6 +5,7 @@ import 'package:agriculture_app/feature/home_page/view/home_screen.dart';
 import 'package:agriculture_app/feature/login/view/login_screen.dart';
 import 'package:agriculture_app/feature/login/widget/text_field_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -17,6 +18,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  String _email = '';
+  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           TextFieldRow(
                             text: 'Email',
                             isPassword: false,
+                            onSave: (value) => _email == value ?? '',
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'please enter  your email';
@@ -73,6 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           TextFieldRow(
                             text: 'Mobile',
                             isPassword: false,
+                            onSave: (value) {},
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'please enter  your mobile number';
@@ -85,6 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           TextFieldRow(
                             text: 'Password',
+                            onSave: (value) => _password == value ?? '',
                             isPassword: true,
                             controller: _passwordController,
                             validator: (value) {
@@ -103,6 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           TextFieldRow(
                             text: 'Confirm Password',
                             controller: _confirmPasswordController,
+                            onSave: (value) {},
                             isPassword: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -126,9 +133,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             horizontal: 35, vertical: 14)),
                                     backgroundColor: WidgetStatePropertyAll(
                                         Color(0xff366842))),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (_formKey.currentState?.validate() ??
                                       false) {
+                                    _formKey.currentState!.save();
+                                    SharedPreferences preferences =
+                                        await SharedPreferences.getInstance();
+                                    await preferences.setString(
+                                        'registerEmail', _email);
+                                    await preferences.setString(
+                                        'registerPassword', _password);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                'Registration successful!')));
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
