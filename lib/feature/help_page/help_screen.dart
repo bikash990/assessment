@@ -10,8 +10,53 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
-  final String description =
-      "paddy, small, level, flooded field used to cultivate rice in southern and eastern Asia. Wet-rice cultivation is the most prevalent method of farming in the Far East, where it utilizes a small fraction of the total land yet feeds the majority of the rural population";
+  final List<Map<String, String>> _items = [
+    {
+      'title': 'Paddy',
+      'description':
+          'Paddy, small, level, flooded field used to cultivate rice in southern and eastern Asia.',
+      'image': ImageConstant.paddy,
+    },
+    {
+      'title': 'Tomato',
+      'description':
+          'Tomato, a red fruit used as a vegetable in cooking. Tomato, a red fruit used as a vegetable in cooking',
+      'image': ImageConstant.tomato,
+    },
+    {
+      'title': 'Potato',
+      'description': 'Potato, a starchy root vegetable that is a staple food.',
+      'image': ImageConstant.potato,
+    },
+  ];
+
+  List<Map<String, String>> _filteredItems = [];
+  TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _filteredItems = _items;
+
+    _searchController.addListener(_filterItems);
+  }
+
+  void _filterItems() {
+    setState(() {
+      _filteredItems = _items
+          .where((item) => item['title']!
+              .toLowerCase()
+              .contains(_searchController.text.toLowerCase()))
+          .toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +70,8 @@ class _HelpScreenState extends State<HelpScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Expanded(
-                child: TextField(
+                child: TextFormField(
+                  controller: _searchController,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsetsDirectional.symmetric(
                           vertical: 5, horizontal: 10),
@@ -62,29 +108,20 @@ class _HelpScreenState extends State<HelpScreen> {
             vertical: 20,
           ),
           child: Column(
-            children: [
-              DescriptionTextWidget(
-                text: description,
-                title: 'Paddy',
-                image: ImageConstant.paddy,
-              ),
-              SizedBox(
-                height: 14,
-              ),
-              DescriptionTextWidget(
-                text: description,
-                title: 'Tomato',
-                image: ImageConstant.tomato,
-              ),
-              SizedBox(
-                height: 14,
-              ),
-              DescriptionTextWidget(
-                text: description,
-                title: 'Potato',
-                image: ImageConstant.potato,
-              )
-            ],
+            children: _filteredItems.map((item) {
+              return Column(
+                children: [
+                  DescriptionTextWidget(
+                    text: item['description']!,
+                    title: item['title']!,
+                    image: item['image']!,
+                  ),
+                  SizedBox(
+                    height: 14,
+                  ),
+                ],
+              );
+            }).toList(),
           ),
         ),
       ),
