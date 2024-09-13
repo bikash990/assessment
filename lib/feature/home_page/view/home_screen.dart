@@ -1,6 +1,9 @@
 import 'package:agriculture_app/constant/image_constant.dart';
 import 'package:agriculture_app/feature/help_page/help_screen.dart';
+import 'package:agriculture_app/feature/irrigation/irration_screen.dart';
 import 'package:agriculture_app/feature/notification/notification_screen.dart';
+import 'package:agriculture_app/feature/profile/profile_screen.dart';
+import 'package:agriculture_app/feature/weather/weather_screen.dart';
 import 'package:agriculture_app/widget/drawer_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff6A7C6F).withOpacity(0.7),
+      backgroundColor: const Color(0xff6A7C6F).withOpacity(0.7),
       appBar: AppBar(
-        backgroundColor: Color(0xff6A7C6F).withOpacity(0.9),
+        backgroundColor: const Color(0xff6A7C6F).withOpacity(0.9),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
+            const Text(
               'Agro Plan',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -29,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 30,
                   fontWeight: FontWeight.w700),
             ),
-            SizedBox(
+            const SizedBox(
               width: 30,
             ),
             Image.asset(
@@ -39,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      drawer: DrawerWidget(),
+      drawer: const DrawerWidget(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -52,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Stack(
                   children: [
                     ClipRRect(
-                        borderRadius: BorderRadius.only(
+                        borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20)),
                         child: Image.asset(ImageConstant.argiImage)),
@@ -71,23 +74,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       bottom: 0,
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        color: Color(0xffC9D4CC),
+                        color: const Color(0xffC9D4CC),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 9, horizontal: 13),
                           child: Row(
                             children: [
-                              Column(
+                              const Column(
                                 children: [
                                   Text(
                                       'Good\n Afternoon\n bikash Today\n weather'),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Image.asset(ImageConstant.sun),
-                              Text(
+                              const Text(
                                 "20°C  wind: 8 KMPH",
                               ),
                             ],
@@ -98,20 +101,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Container(
                 height: 15,
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Color(0xff6A7C6F)),
+                    color: const Color(0xff6A7C6F)),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 27, horizontal: 30),
@@ -120,17 +123,29 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            children: [
-                              Image.asset(ImageConstant.cropFrame),
-                              Text('Crops Management'),
-                            ],
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => HelpScreen())),
+                            child: Column(
+                              children: [
+                                Image.asset(ImageConstant.cropFrame),
+                                const Text('Crops Management'),
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: [
-                              Image.asset(ImageConstant.irrigation),
-                              Text('Irrigation'),
-                            ],
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => IrrigationScreen())),
+                            child: Column(
+                              children: [
+                                Image.asset(ImageConstant.irrigation),
+                                const Text('Irrigation'),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -140,17 +155,29 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            children: [
-                              Image.asset(ImageConstant.chart),
-                              Text('Market Information'),
-                            ],
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => ProfileScreen())),
+                            child: Column(
+                              children: [
+                                Image.asset(ImageConstant.chart),
+                                const Text('Market Information'),
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: [
-                              Image.asset(ImageConstant.weather),
-                              Text('Weather'),
-                            ],
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => WeatherScreen())),
+                            child: Column(
+                              children: [
+                                Image.asset(ImageConstant.weather),
+                                const Text('Weather'),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -186,7 +213,8 @@ class DrawerItem extends StatelessWidget {
         ),
         Text(
           name,
-          style: TextStyle(fontSize: 16, color: color ?? Color(0xff625D5D)),
+          style:
+              TextStyle(fontSize: 16, color: color ?? const Color(0xff625D5D)),
         )
       ],
     );
