@@ -17,7 +17,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   Weather? _weather;
   bool _isLoading = false;
-  final double _latitude = -33.8688; // Example latitude (San Francisco)
+  final double _latitude = -33.8688;
   final double _longitude = 151.2093;
 
   void _fetchWeather() async {
@@ -30,7 +30,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
       setState(() {
         _weather = Weather.fromJson(weatherData);
-        // _forecasts = forecasts;
       });
     } catch (e) {
       print(e);
