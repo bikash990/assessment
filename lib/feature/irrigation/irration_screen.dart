@@ -14,18 +14,19 @@ class _IrrigationScreenState extends State<IrrigationScreen> {
     {
       'title': 'Paddy',
       'description':
-          'Paddy, small, level, flooded field used to cultivate rice in southern and eastern Asia.',
+          "1200-1500 mm water, Flood early, consistent during panicle initation, reduce near maturity. By using flood irrigation or SRI method.",
       'image': ImageConstant.paddy,
     },
     {
       'title': 'Tomato',
       'description':
-          'Tomato, a red fruit used as a vegetable in cooking. Tomato, a red fruit used as a vegetable in cooking',
+          '600-00 mm water with moderate early, frequent during flowering and fruit set, reduce near ripening, and drio irrigation ideal method were used',
       'image': ImageConstant.tomato,
     },
     {
       'title': 'Potato',
-      'description': 'Potato, a starchy root vegetable that is a staple food.',
+      'description':
+          "500-700 mm water, Light and frequent early, critical during tuber initiation, reduce near harvest. By using drip or furrow method.",
       'image': ImageConstant.potato,
     },
   ];

@@ -21,6 +21,7 @@ class MyGraphWidget extends StatelessWidget {
     barData.initializeData();
     return BarChart(
       BarChartData(
+        backgroundColor: Colors.white,
         maxY: 200,
         minY: 0,
         barGroups: barData.barData

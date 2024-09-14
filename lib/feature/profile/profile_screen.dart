@@ -19,9 +19,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
     140.50,
     81.45,
   ];
+  List<double> _tomatoSummary = [
+    30.5,
+    120.0,
+    60.3,
+    100.0,
+    70.45,
+  ];
+
+  List<double> _potatoSummary = [
+    20.4,
+    150.2,
+    80.5,
+    130.1,
+    90.0,
+  ];
+
+  String _selectedProduct = "yearly";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff6A7C6F).withOpacity(0.6),
       appBar: AppBar(
         toolbarHeight: 80,
         backgroundColor: const Color(0xff6A7C6F).withOpacity(0.9),
@@ -63,24 +81,94 @@ class _ProfileScreenState extends State<ProfileScreen> {
       drawer: const DrawerWidget(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 50,
             vertical: 20,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Real time Market',
                 style: TextStyle(fontSize: 24, fontStyle: FontStyle.italic),
               ),
-              SizedBox(
+              const Text('Top Sell'),
+              Text(
+                _selectedProduct == "tomato"
+                    ? "Tomato @ 92/20kg"
+                    : _selectedProduct == "potato"
+                        ? "@ 112/20kg"
+                        : "Paddy @120/40kg",
+                style:
+                    TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+              ),
+              const SizedBox(
                 height: 20,
               ),
               SizedBox(
                   height: 300,
                   child: MyGraphWidget(
-                    weeklySummary: _yearlySummary,
+                    weeklySummary: _selectedProduct == "tomato"
+                        ? _tomatoSummary
+                        : _selectedProduct == "potato"
+                            ? _potatoSummary
+                            : _yearlySummary,
                   )),
+              const Text('Top buyer'),
+              const Text("shree Dev Rice 120/40kg. Liverpool, MSW"),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'More we have:',
+                style:
+                    TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      decoration:
+                          BoxDecoration(color: Colors.white.withOpacity(0.6)),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedProduct = "tomato";
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(ImageConstant.tomato),
+                            const Text('92/20kg')
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration:
+                          BoxDecoration(color: Colors.white.withOpacity(0.6)),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedProduct = "potato";
+                          });
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(ImageConstant.potato),
+                            const Text('112/20kg')
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),

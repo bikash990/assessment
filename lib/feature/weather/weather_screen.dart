@@ -50,7 +50,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
 
-    // Create a DateFormat for "Friday, Sep 13"
     DateFormat dateFormat = DateFormat('EEEE, MMM d');
     String formattedDate = dateFormat.format(now);
 
@@ -65,244 +64,246 @@ class _WeatherScreenState extends State<WeatherScreen> {
         ),
         backgroundColor: const Color(0xff6A7C6F).withOpacity(0.7),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Center(
-          child: _isLoading
-              ? const CircularProgressIndicator()
-              : _weather == null
-                  ? const Text('No data')
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Sydney',
-                          style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          formattedDate,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          '${_weather!.temperature} °C',
-                          style: const TextStyle(
-                              fontSize: 20, color: Colors.white),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          '${_weather!.description}',
-                          style: const TextStyle(
-                              fontSize: 20, color: Colors.white),
-                        ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Color(0xffD9D9D9),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(30),
-                                topRight: Radius.circular(30)),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          child: Center(
+            child: _isLoading
+                ? const CircularProgressIndicator()
+                : _weather == null
+                    ? const Text('No data')
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Sydney',
+                            style: TextStyle(
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
                           ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 20),
-                          child: Column(
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            formattedDate,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            '${_weather!.temperature} °C',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            '${_weather!.description}',
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Color(0xffD9D9D9),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30)),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 20),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image.asset(ImageConstant.wind),
+                                    Image.asset(ImageConstant.humidity),
+                                    Image.asset(ImageConstant.visibility),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '${_weather!.windSpeed} m/s\nwind',
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '${_weather!.windSpeed} %\nhumidity',
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '${_weather!.visibility / 1000} km\nvisibility',
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.asset(ImageConstant.wind),
-                                  Image.asset(ImageConstant.humidity),
-                                  Image.asset(ImageConstant.visibility),
-                                ],
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 13, vertical: 25),
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffD9D9D9),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25))),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      ImageConstant.rainy,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      _weather!.description,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                    const Text(
+                                      "18 c",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const SizedBox(
-                                height: 30,
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 13, vertical: 25),
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffD9D9D9),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25))),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      ImageConstant.rainy,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      _weather!.description,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                    const Text(
+                                      "18 c",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '${_weather!.windSpeed} m/s\nwind',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '${_weather!.windSpeed} %\nhumidity',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '${_weather!.visibility / 1000} km\nvisibility',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 13, vertical: 25),
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffD9D9D9),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(25))),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      ImageConstant.rainy,
+                                      color: Colors.white,
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      _weather!.description,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                    const Text(
+                                      "18 c",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 13, vertical: 25),
-                              decoration: const BoxDecoration(
-                                  color: Color(0xffD9D9D9),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    ImageConstant.rainy,
+                          SizedBox(
+                            height: 20,
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Today',
+                                style: TextStyle(
                                     color: Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    _weather!.description,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  const Text(
-                                    "18 c",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ],
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 13, vertical: 25),
-                              decoration: const BoxDecoration(
-                                  color: Color(0xffD9D9D9),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    ImageConstant.rainy,
+                              Text(
+                                'Tommorrow',
+                                style: TextStyle(
                                     color: Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    _weather!.description,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  const Text(
-                                    "18 c",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ],
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 13, vertical: 25),
-                              decoration: const BoxDecoration(
-                                  color: Color(0xffD9D9D9),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    ImageConstant.rainy,
+                              Text(
+                                'Tuesday',
+                                style: TextStyle(
                                     color: Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    _weather!.description,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  const Text(
-                                    "18 c",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                ],
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Today',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Tommorrow',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'Tuesday',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                            ],
+                          )
+                        ],
+                      ),
+          ),
         ),
       ),
     );
