@@ -181,7 +181,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                             children: [
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 13, vertical: 25),
+                                    horizontal: 8, vertical: 25),
                                 decoration: const BoxDecoration(
                                     color: Color(0xffD9D9D9),
                                     borderRadius:
@@ -211,8 +211,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 ),
                               ),
                               Container(
+                                width: 100,
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 13, vertical: 25),
+                                    horizontal: 8, vertical: 25),
                                 decoration: const BoxDecoration(
                                     color: Color(0xffD9D9D9),
                                     borderRadius:
@@ -228,6 +229,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                     ),
                                     Text(
                                       _weather!.description,
+                                      // 'sjhfjsdfhsdjfhfhjf kfjdkjf',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white),
@@ -242,8 +246,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 ),
                               ),
                               Container(
+                                width: 100,
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 13, vertical: 25),
+                                    horizontal: 8, vertical: 25),
                                 decoration: const BoxDecoration(
                                     color: Color(0xffD9D9D9),
                                     borderRadius:
@@ -279,7 +284,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           ),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 'Today',
